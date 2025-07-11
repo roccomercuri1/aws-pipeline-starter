@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - echo "Hello World from BuildSpec.yml"
-      - echo "$EMILE_SECRET"
+      - echo "$NAME"
 
 artifacts:
   files:
