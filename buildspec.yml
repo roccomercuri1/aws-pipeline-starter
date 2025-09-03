@@ -1,24 +1,9 @@
 version: 0.2
 
-env:
-  secrets-manager:
-    SECRET_USERNAME: "pipeline-docker-credentials-2:username"
-    SECRET_PASSWORD: "pipeline-docker-credentials-2:password"
-
 phases:
-  pre_build:
-    commands:
-      - echo Logging in to Docker registry...
-      - echo "$SECRET_PASSWORD" | docker login -u "$SECRET_USERNAME" --password-stdin
   build:
     commands:
-      - echo "Building Docker image..."
-      - docker build -t emilesherrott/pottery-db:latest .
-  post_build:
-    commands:
-      - echo "Pushing Docker image..."
-      - docker push emilesherrott/pottery-db:latest
-
+      - echo "Hello World from BuildSpec.yml"
 artifacts:
   files:
     - Dockerfile
