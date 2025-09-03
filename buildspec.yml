@@ -6,10 +6,21 @@ env:
     SECRET_PASSWORD: "docker-credentials:password"
 
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to DockerHun
+      - echo "$SECRET_PASSWORD" | docker login -u "$SECRET_USERNAME" --password-stdin
+
   build:
     commands:
-      - echo "Hello World from BuildSpec.yml reveal your secrets,"
-      - echo "$SECRET_USERNAME"
+      - echo "Building Docker Image"
+      - docker build -t roccomercuri1/pottery-db:latest .
+        # add --platform linux/arm64  after build for mac silicon
+
+  post_build:
+    commands:
+      - echo "Pushing Docker Image..."
+      - docker push roccomercuri1/pottery-db:latest .
 
 artifacts:
   files:
